@@ -12,11 +12,9 @@ Dự án môn học của **Nhóm 60**: hệ thống đặt lịch trực tuyế
 
 | Thành phần | Công nghệ | Phiên bản |
 |---|---|---|
-| Nền tảng web | WordPress + theme Flatsome | …… (điền theo hosting) |
-| Ngôn ngữ xử lý | PHP | …… (khuyến nghị ≥ 8.0) |
-| Cơ sở dữ liệu | MySQL / MariaDB, utf8mb4 | …… |
-| Plugin nghiệp vụ | `ruby-nails-core` (repo này) | 0.1.0 |
-| Hosting | SSD Hosting Tenten, tên miền rubynails.id.vn, HTTPS | – |
+| Nền tảng web | WordPress + theme Flatsome | WordPress 6.x |
+| Ngôn ngữ xử lý | PHP | 8.4.28 |
+| Cơ sở dữ liệu | MariaDB, utf8mb4 | 10.11.19 |
 
 | Môi trường | Địa chỉ | Dùng để |
 |---|---|---|
