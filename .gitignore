@@ -1,0 +1,17 @@
+# Cấu hình chứa mật khẩu
+wp-config.php
+.env
+
+# Lõi WordPress và file tải lên (không đưa lên repo)
+wp-admin/
+wp-includes/
+wp-content/uploads/
+wp-content/upgrade/
+wp-content/cache/
+wp-content/themes/flatsome*/
+
+# Rác hệ thống
+*.log
+.DS_Store
+Thumbs.db
+node_modules/
