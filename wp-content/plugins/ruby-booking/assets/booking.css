@@ -1,0 +1,433 @@
+/* Ruby Booking – tông hồng / trắng / đỏ rượu */
+.rb-app{
+  --rb-wine:#8B1E3F;--rb-wine2:#6E1631;--rb-pink:#F9E4EA;--rb-pink2:#FDF2F5;--rb-line:#EFC9D4;
+  --rb-ink:#3A2A2F;--rb-mute:#7A6168;--rb-bd:#E6D6DB;--rb-ok:#2E8B57;--rb-err:#C62F3E;
+  font-family:"Be Vietnam Pro",system-ui,sans-serif;color:var(--rb-ink);font-size:15px;line-height:1.5;
+  max-width:1120px;margin:0 auto;padding:28px 0 40px;text-align:left;
+  container:rb / inline-size;
+}
+.rb-app *,.rb-app *::before,.rb-app *::after{box-sizing:border-box}
+.rb-app .rb-loading{padding:40px;text-align:center;color:var(--rb-mute)}
+.rb-app h2,.rb-app h3,.rb-app h4{font-family:inherit;color:var(--rb-wine2);margin:0;letter-spacing:0;text-transform:none;line-height:1.3}
+.rb-app p{margin:0}
+.rb-app small{font-size:12.5px}
+.rb-app a{color:var(--rb-wine)}
+.rb-app button{font-family:inherit;text-transform:none;letter-spacing:0;margin:0;min-height:0;line-height:1.4;font-weight:400;box-shadow:none;cursor:pointer}
+.rb-app .rb-i{display:inline-flex;width:18px;height:18px;flex:none}
+.rb-app .rb-i svg,.rb-app i svg{width:100%;height:100%;display:block}
+
+/* ---------- progress ---------- */
+.rb-app .rb-prog{display:flex;align-items:center;list-style:none;margin:0 0 24px;padding:0;counter-reset:none}
+.rb-app .rb-prog li{display:flex;align-items:center;flex:1;margin:0;color:#A89199;font-size:14px}
+.rb-app .rb-prog li:last-child{flex:none}
+.rb-app .rb-prog li::after{content:"";flex:1;height:2px;background:#EBDCE1;margin:0 12px}
+.rb-app .rb-prog li:last-child::after{display:none}
+.rb-app .rb-prog li.done::after{background:var(--rb-wine)}
+.rb-app .rb-prog button,.rb-app .rb-prog span{display:flex;align-items:center;gap:8px;background:none;border:0;padding:0;color:inherit;font-size:inherit;white-space:nowrap}
+.rb-app .rb-prog i{width:28px;height:28px;border-radius:50%;border:1.5px solid #E2CCD3;display:grid;place-items:center;font-style:normal;font-size:13px;font-weight:600;background:#fff;flex:none}
+.rb-app .rb-prog i svg{width:15px;height:15px}
+.rb-app .rb-prog em{font-style:normal}
+.rb-app .rb-prog li.done{color:var(--rb-wine)}
+.rb-app .rb-prog li.done i{background:var(--rb-wine);border-color:var(--rb-wine);color:#fff}
+.rb-app .rb-prog li.cur{color:var(--rb-wine2);font-weight:600}
+.rb-app .rb-prog li.cur i{border:2px solid var(--rb-wine);color:var(--rb-wine);box-shadow:0 0 0 4px var(--rb-pink)}
+
+/* ---------- layout ---------- */
+.rb-app .rb-grid{display:grid;grid-template-columns:minmax(0,1fr) 330px;gap:26px;align-items:start}
+.rb-app .rb-main{background:#fff;border:1px solid #F0E1E6;border-radius:18px;padding:26px 28px;min-width:0}
+.rb-app .rb-head{margin-bottom:18px}
+.rb-app .rb-head h2{font-size:22px;font-weight:600}
+.rb-app .rb-head p{color:var(--rb-mute);font-size:14px;margin-top:4px}
+.rb-app .rb-empty{color:var(--rb-mute);font-size:14px}
+.rb-app .rb-warn{background:#FDECEE;color:#8E2433;border-radius:12px;padding:11px 14px;font-size:14px;margin:12px 0}
+.rb-app .rb-hint{display:flex;gap:6px;align-items:center;color:var(--rb-mute);font-size:14px;margin-top:16px}
+.rb-app .rb-hint b{color:var(--rb-wine2)}
+
+/* ---------- summary ---------- */
+.rb-app .rb-sum{background:#fff;border:1px solid #F0E1E6;border-radius:18px;padding:22px;position:sticky;top:110px}
+.rb-app .rb-sum h3{font-family:"Playfair Display",serif;font-size:21px;font-weight:700;margin-bottom:16px}
+.rb-app .rb-sr{display:flex;gap:11px;align-items:flex-start;margin-bottom:13px;font-size:14px}
+.rb-app .rb-sr>.rb-i{color:var(--rb-wine);margin-top:2px}
+.rb-app .rb-sr>div{flex:1;min-width:0}
+.rb-app .rb-sr b{font-weight:500;display:block}
+.rb-app .rb-sr small{color:var(--rb-mute);display:block}
+.rb-app .rb-sr>span{font-weight:500;white-space:nowrap}
+.rb-app .rb-sr.rb-meta{border-top:1px solid #F1E3E7;padding-top:13px}
+.rb-app .rb-tot{display:flex;justify-content:space-between;align-items:center;background:var(--rb-pink);border-radius:12px;padding:13px 15px;font-size:14px;margin-top:6px}
+.rb-app .rb-tot span small{display:block;color:var(--rb-mute)}
+.rb-app .rb-tot b{font-size:20px;color:var(--rb-wine2);font-weight:600}
+.rb-app .rb-tot.big b{font-size:24px}
+.rb-app .rb-msum{display:none}
+.rb-app .rb-msum{background:var(--rb-pink);border-radius:12px;margin-bottom:16px}
+.rb-app .rb-msum summary{display:flex;justify-content:space-between;align-items:center;padding:10px 13px;cursor:pointer;list-style:none}
+.rb-app .rb-msum summary::-webkit-details-marker{display:none}
+.rb-app .rb-msum summary small{display:block;color:var(--rb-mute)}
+.rb-app .rb-msum summary b{font-size:16px;color:var(--rb-wine2);font-weight:600}
+.rb-app .rb-msum summary>span{display:flex;align-items:center;gap:3px;font-size:13px;color:var(--rb-wine)}
+.rb-app .rb-msum summary .rb-i{width:15px;height:15px;transition:transform .2s}
+.rb-app .rb-msum[open] summary .rb-i{transform:rotate(180deg)}
+.rb-app .rb-msum[open]{padding-bottom:6px}
+.rb-app .rb-msum>*:not(summary){margin-left:13px;margin-right:13px}
+.rb-app .rb-msum .rb-tot{background:#fff}
+.rb-app .rb-full .rb-msum{display:block}
+
+/* ---------- nav ---------- */
+.rb-app .rb-nav{display:flex;justify-content:space-between;align-items:center;gap:12px;border-top:1px solid #F3E6EA;margin-top:24px;padding-top:18px}
+.rb-app .rb-navtot small{display:block;color:var(--rb-mute)}
+.rb-app .rb-navtot b{font-size:18px;color:var(--rb-wine2);font-weight:600}
+.rb-app .rb-btn{white-space:nowrap;display:inline-flex;align-items:center;justify-content:center;gap:8px;border-radius:999px;padding:12px 24px;font-size:15px;font-weight:500;text-decoration:none;border:1.3px solid transparent;transition:background .15s,box-shadow .15s,transform .1s;height:auto}
+.rb-app .rb-btn:active{transform:translateY(1px)}
+.rb-app .rb-primary{background:var(--rb-wine);color:#fff;box-shadow:0 10px 20px -12px rgba(139,30,63,.8)}
+.rb-app .rb-primary:hover{background:var(--rb-wine2);color:#fff}
+.rb-app .rb-primary[disabled]{background:#D9B7C2;box-shadow:none;cursor:not-allowed}
+.rb-app .rb-ghost{background:#fff;color:var(--rb-mute);border-color:var(--rb-bd)}
+.rb-app .rb-ghost:hover{border-color:var(--rb-wine);color:var(--rb-wine)}
+.rb-app .rb-danger{background:var(--rb-err);color:#fff}
+.rb-app .rb-link{display:inline-flex;align-items:center;gap:5px;background:none;border:0;padding:0;color:var(--rb-wine);font-size:13.5px}
+.rb-app .rb-link .rb-i{width:15px;height:15px}
+
+/* ---------- step 1 ---------- */
+.rb-app .rb-chips{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:16px}
+.rb-app .rb-chip{background:#fff;border:1.3px solid var(--rb-bd);border-radius:999px;padding:7px 16px;font-size:14px;color:var(--rb-ink)}
+.rb-app .rb-chip.on{background:var(--rb-wine);border-color:var(--rb-wine);color:#fff}
+.rb-app .rb-tick{width:24px;height:24px;border-radius:50%;border:1.5px solid #E2CCD3;display:grid;place-items:center;color:transparent;background:#fff;flex:none;padding:4px}
+.rb-app .on>.rb-tick,.rb-app .on .rb-svc-r .rb-tick{background:var(--rb-wine);border-color:var(--rb-wine);color:#fff}
+
+/* ---------- step 2 ---------- */
+
+/* ---------- step 3 ---------- */
+.rb-app .rb-days{display:flex;gap:8px;overflow-x:auto;padding:2px 2px 10px;margin-bottom:12px;scrollbar-width:thin}
+.rb-app .rb-day{flex:0 0 64px;display:flex;flex-direction:column;align-items:center;gap:1px;background:#fff;border:1.5px solid var(--rb-bd);border-radius:14px;padding:9px 0;color:var(--rb-ink)}
+.rb-app .rb-day small{color:var(--rb-mute);font-size:11.5px}
+.rb-app .rb-day b{font-size:19px;font-weight:600}
+.rb-app .rb-day.on{background:var(--rb-wine);border-color:var(--rb-wine);color:#fff}
+.rb-app .rb-day.on small{color:#F5D3DD}
+.rb-app .rb-day[disabled]{opacity:.4;cursor:not-allowed;text-decoration:line-through}
+.rb-app .rb-sg{margin-bottom:16px}
+.rb-app .rb-sg h4{font-size:13.5px;font-weight:600;color:var(--rb-mute);margin-bottom:9px}
+.rb-app .rb-sgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(84px,1fr));gap:8px}
+.rb-app .rb-slot{background:#fff;border:1.3px solid var(--rb-bd);border-radius:10px;padding:10px 0;font-size:14.5px;font-weight:500;color:var(--rb-ink)}
+.rb-app .rb-slot:hover{border-color:var(--rb-wine);color:var(--rb-wine)}
+.rb-app .rb-slot.on{background:var(--rb-wine);border-color:var(--rb-wine);color:#fff}
+.rb-app .rb-skel{display:grid;grid-template-columns:repeat(auto-fill,minmax(84px,1fr));gap:8px}
+.rb-app .rb-skel span{height:42px;border-radius:10px;background:linear-gradient(90deg,#F7EEF1,#FBF5F7,#F7EEF1);background-size:200% 100%;animation:rbsk 1.2s infinite}
+@keyframes rbsk{to{background-position:-200% 0}}
+.rb-app .rb-none{display:flex;gap:14px;align-items:center;background:var(--rb-pink2);border-radius:14px;padding:18px;color:var(--rb-mute);font-size:14px}
+.rb-app .rb-none>.rb-i{width:30px;height:30px;color:var(--rb-wine)}
+.rb-app .rb-none b{color:var(--rb-wine2)}
+
+/* ---------- step 4 ---------- */
+.rb-app .rb-guest{display:flex;gap:10px;align-items:center;background:var(--rb-pink2);border:1px dashed var(--rb-line);border-radius:12px;padding:11px 14px;font-size:14px;margin-bottom:18px}
+.rb-app .rb-guest>.rb-i{color:var(--rb-wine)}
+.rb-app .rb-guest b{color:var(--rb-wine2);font-weight:600}
+.rb-app .rb-row2{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:16px}
+.rb-app .rb-field{margin-bottom:6px}
+.rb-app .rb-field>label{display:block;font-size:14px;font-weight:500;margin:0 0 7px;color:var(--rb-ink)}
+.rb-app .rb-field em,.rb-app .rb-agree em{color:var(--rb-err);font-style:normal}
+.rb-app .rb-field>label small{color:#A89199;font-weight:400}
+.rb-app .rb-in{display:flex;align-items:center;gap:9px;min-height:48px;border:1.3px solid var(--rb-bd);border-radius:12px;padding:0 13px;background:#fff;transition:border-color .15s,box-shadow .15s}
+.rb-app .rb-in:focus-within{border-color:var(--rb-wine);box-shadow:0 0 0 3px var(--rb-pink)}
+.rb-app .rb-in>.rb-i{color:#B79AA3}
+.rb-app .rb-in input,.rb-app .rb-in textarea{flex:1;min-width:0;border:0;outline:0;background:transparent;box-shadow:none;margin:0;padding:12px 0;height:auto;font:inherit;font-size:15px;color:var(--rb-ink);border-radius:0}
+.rb-app .rb-in input:focus,.rb-app .rb-in textarea:focus{box-shadow:none;background:transparent}
+.rb-app .rb-in input::placeholder,.rb-app .rb-in textarea::placeholder{color:#B9A6AC}
+.rb-app .rb-in textarea{resize:vertical;min-height:70px}
+.rb-app .rb-st-ic{display:none;width:18px;height:18px;flex:none}
+.rb-app .is-ok .rb-in{border-color:#BFDCCB}
+.rb-app .is-ok .rb-st-ic{display:block;color:var(--rb-ok)}
+.rb-app .is-err .rb-in{border-color:var(--rb-err);box-shadow:0 0 0 3px #FBE3E6}
+.rb-app .is-err .rb-st-ic{display:block;color:var(--rb-err)}
+.rb-app .rb-err{min-height:18px;font-size:12.5px;color:var(--rb-err);margin:5px 0 4px}
+.rb-app .rb-err:empty{min-height:8px}
+.rb-app .rb-up{display:flex;gap:14px;align-items:center;flex-wrap:wrap}
+.rb-app .rb-drop{flex:1 1 280px;display:flex;gap:13px;align-items:center;border:1.5px dashed #E3B7C4;background:var(--rb-pink2);border-radius:12px;padding:14px 16px;color:var(--rb-wine);cursor:pointer;position:relative;margin:0;font-weight:400}
+.rb-app .rb-drop.drag{background:var(--rb-pink);border-color:var(--rb-wine)}
+.rb-app .rb-drop[aria-disabled=true]{opacity:.5;pointer-events:none}
+.rb-app .rb-drop>.rb-i{width:26px;height:26px}
+.rb-app .rb-drop b{display:block;font-size:14px;font-weight:600;color:var(--rb-wine2)}
+.rb-app .rb-drop small{display:block;color:var(--rb-mute);font-size:12px}
+.rb-app .rb-drop input{position:absolute;inset:0;opacity:0;cursor:pointer;width:100%;height:100%;margin:0}
+.rb-app .rb-thumbs{display:flex;gap:10px;flex-wrap:wrap}
+.rb-app .rb-th{position:relative;width:64px;height:64px}
+.rb-app .rb-th img{width:100%;height:100%;object-fit:cover;border-radius:11px;display:block}
+.rb-app .rb-th button{position:absolute;top:-7px;right:-7px;width:22px;height:22px;border-radius:50%;background:var(--rb-wine2);color:#fff;border:2px solid #fff;padding:3px;display:grid;place-items:center}
+.rb-app .rb-thumbs.sm .rb-th{width:46px;height:46px}
+.rb-app .rb-agree{display:flex;gap:10px;align-items:flex-start;font-size:14px;margin:10px 0 0;cursor:pointer;font-weight:400;position:relative}
+.rb-app .rb-agree input{position:absolute;opacity:0;width:20px;height:20px;margin:0}
+.rb-app .rb-agree i{width:21px;height:21px;border-radius:6px;border:1.5px solid #D9BCC5;display:grid;place-items:center;flex:none;margin-top:1px;color:transparent;background:#fff;padding:3px}
+.rb-app .rb-agree input:checked+i{background:var(--rb-wine);border-color:var(--rb-wine);color:#fff}
+.rb-app .rb-agree input:focus-visible+i{box-shadow:0 0 0 3px var(--rb-pink)}
+.rb-app .rb-agree.is-err i{border-color:var(--rb-err)}
+.rb-app .rb-err-agree{margin-left:31px}
+.rb-app .rb-hp{position:absolute!important;left:-9999px!important;width:1px;height:1px;opacity:0}
+
+/* ---------- step 5 ---------- */
+.rb-app .rb-review{display:grid;gap:12px}
+.rb-app .rb-rv{border:1px solid #F0E1E6;border-radius:14px;padding:14px 16px;font-size:14.5px}
+.rb-app .rb-rv header{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px}
+.rb-app .rb-rv h4{font-size:13.5px;font-weight:600;color:var(--rb-mute);text-transform:uppercase;letter-spacing:.04em}
+.rb-app .rb-rv small{color:var(--rb-mute)}
+.rb-app .rb-rl{display:flex;justify-content:space-between;gap:16px;padding:5px 0;font-size:14.5px}
+.rb-app .rb-rl>span:first-child{color:var(--rb-mute)}
+.rb-app .rb-rl b{font-weight:500;text-align:right}
+.rb-app .rb-rv .rb-rl>span:first-child{color:var(--rb-ink)}
+
+/* ---------- success / status ---------- */
+.rb-app .rb-success,.rb-app .rb-lookup{max-width:620px;margin:0 auto}
+.rb-app .rb-success{background:#fff;border:1px solid #F0E1E6;border-radius:20px;overflow:hidden}
+.rb-app .rb-done-hero{background:var(--rb-pink2);text-align:center;padding:34px 26px 26px}
+.rb-app .rb-done-ic{width:68px;height:68px;border-radius:50%;background:var(--rb-wine);color:#fff;display:grid;place-items:center;margin:0 auto 14px;padding:16px;box-shadow:0 0 0 8px var(--rb-pink)}
+.rb-app .rb-done-hero h2{font-family:"Playfair Display",serif;font-size:28px;font-weight:700}
+.rb-app .rb-done-hero p{color:var(--rb-mute);margin-top:8px}
+.rb-app .rb-code{display:inline-flex;flex-direction:column;align-items:center;gap:2px;background:#fff;border:1.5px dashed var(--rb-line);border-radius:14px;padding:12px 26px;margin-top:18px}
+.rb-app .rb-code small{color:var(--rb-mute)}
+.rb-app .rb-code b{font-size:24px;letter-spacing:.06em;color:var(--rb-wine2);font-weight:600}
+.rb-app .rb-done-body{padding:20px 26px 6px}
+.rb-app .rb-done-acts{display:flex;flex-wrap:wrap;gap:10px;justify-content:center;padding:14px 26px 4px}
+.rb-app .rb-small{text-align:center;color:var(--rb-mute);font-size:13px;padding:14px 26px 22px}
+.rb-app .rb-badge{display:inline-block;padding:3px 12px;border-radius:999px;font-size:12.5px;font-weight:600;white-space:nowrap}
+.rb-app .rb-pending{background:#FFF4E0;color:#8A5A00}
+.rb-app .rb-confirmed{background:#E3F4EA;color:#1F6B41}
+.rb-app .rb-badge.rb-done{background:#E8EEF9;color:#2B4C8C}
+.rb-app .rb-cancelled{background:#F3E9EC;color:var(--rb-wine)}
+.rb-app .rb-lform{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr) auto;gap:12px;align-items:end;background:#fff;border:1px solid #F0E1E6;border-radius:18px;padding:20px}
+.rb-app .rb-lform .rb-field{margin:0}
+.rb-app .rb-lform .rb-btn{height:48px}
+.rb-app .rb-lookup{max-width:760px}
+.rb-app .rb-scard{background:#fff;border:1px solid #F0E1E6;border-radius:18px;margin-top:18px;overflow:hidden}
+.rb-app .rb-scard header{display:flex;justify-content:space-between;align-items:center;padding:18px 24px;background:var(--rb-pink2)}
+.rb-app .rb-scard header small{display:block;color:var(--rb-mute)}
+.rb-app .rb-scard header b{font-size:20px;letter-spacing:.05em;color:var(--rb-wine2);font-weight:600}
+.rb-app .rb-tl{display:flex;list-style:none;margin:0;padding:20px 24px 4px}
+.rb-app .rb-tl li{flex:1;display:flex;flex-direction:column;align-items:center;gap:6px;font-size:12.5px;color:#A89199;position:relative;margin:0;text-align:center}
+.rb-app .rb-tl li::before{content:"";position:absolute;top:13px;right:50%;width:100%;height:2px;background:#EBDCE1;z-index:0}
+.rb-app .rb-tl li:first-child::before{display:none}
+.rb-app .rb-tl li.done::before{background:var(--rb-wine)}
+.rb-app .rb-tl i{width:28px;height:28px;border-radius:50%;border:1.5px solid #E2CCD3;background:#fff;display:grid;place-items:center;color:#fff;padding:6px;z-index:1;position:relative}
+.rb-app .rb-tl li.done{color:var(--rb-wine2)}
+.rb-app .rb-tl li.done i{background:var(--rb-wine);border-color:var(--rb-wine)}
+.rb-app .rb-tl li.cur span{font-weight:600}
+.rb-app .rb-tl li.cx{color:var(--rb-err)}
+.rb-app .rb-tl li.cx i{background:var(--rb-err);border-color:var(--rb-err)}
+.rb-app .rb-tl li.cx::before{background:var(--rb-err)}
+.rb-app .rb-sacts{display:flex;gap:10px;flex-wrap:wrap;padding:12px 24px 22px}
+.rb-app .rb-cc{margin:12px 24px 22px;background:#FDECEE;border-radius:14px;padding:14px 16px;display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;color:#8E2433}
+.rb-app .rb-cc>div{display:flex;gap:8px}
+.rb-app .rb-okmsg{display:flex;gap:8px;align-items:center;margin:12px 24px 0;color:var(--rb-ok);font-size:14px}
+
+/* ---------- mobile ---------- */
+@container rb (max-width:820px){
+  .rb-app .rb-grid{grid-template-columns:1fr}
+  .rb-app .rb-sum{display:none}
+  .rb-app .rb-main{padding:18px 16px 0;border-radius:16px;border-left:0;border-right:0}
+  .rb-app .rb-prog{margin-bottom:14px;padding:0 4px}
+  .rb-app .rb-prog li::after{margin:0 6px}
+  .rb-app .rb-prog li:not(.cur) em{display:none}
+  .rb-app .rb-prog i{width:24px;height:24px;font-size:12px}
+  .rb-app .rb-head h2{font-size:19px}
+  .rb-app .rb-msum{display:block}
+  .rb-app .rb-row2{grid-template-columns:1fr;gap:0 16px}
+  .rb-app .rb-navwrap{margin:20px -16px 0;bottom:0}
+  .rb-app .rb-navwrap .rb-nav{border-radius:0;padding:12px 16px calc(12px + env(safe-area-inset-bottom));box-shadow:0 -8px 20px -14px rgba(110,22,49,.35)}
+  .rb-app .rb-nav .rb-primary{flex:1}
+  .rb-app .rb-nav .rb-ghost span:not(.rb-i){display:none}
+  .rb-app .rb-nav .rb-ghost{padding:12px 14px}
+  .rb-app .rb-lform{grid-template-columns:1fr}
+  .rb-app .rb-done-hero{padding:26px 18px 20px}
+  .rb-app .rb-done-body,.rb-app .rb-done-acts{padding-left:18px;padding-right:18px}
+  .rb-app .rb-done-acts .rb-btn{flex:1 1 100%}
+  .rb-app .rb-rl{flex-wrap:wrap}
+}
+
+@media (max-width:860px){.rb-app{padding:14px 0 0}}
+
+/* =========================================================
+ * v1.1 – thẻ ảnh dịch vụ / kỹ thuật viên + hiệu ứng
+ * ======================================================= */
+.rb-app .rb-grid.rb-full{grid-template-columns:minmax(0,1fr)}
+.rb-app .rb-full .rb-sumwrap{display:none}
+.rb-app .rb-sumwrap{align-self:stretch}
+.rb-app .rb-full .rb-msum{margin-bottom:18px}
+
+/* sticky bottom bar – always reachable without scrolling */
+.rb-app .rb-navwrap{position:sticky;bottom:0;z-index:20;margin:24px -28px -26px}
+.rb-app .rb-navwrap .rb-nav{margin:0;padding:16px 28px;background:rgba(255,255,255,.95);-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px);border-top:1px solid #F3E6EA;border-radius:0 0 18px 18px}
+.rb-app .rb-primary .rb-i{transition:transform .25s}
+.rb-app .rb-primary:not([disabled]):hover .rb-i{transform:translateX(3px)}
+
+/* progress: next reachable step pulses, clickable steps lift */
+.rb-app .rb-prog button{cursor:pointer}
+.rb-app .rb-prog i{transition:transform .2s,box-shadow .2s,background .2s}
+.rb-app .rb-prog button:hover i{transform:scale(1.12)}
+.rb-app .rb-prog button:hover em{text-decoration:underline;text-underline-offset:4px}
+.rb-app .rb-prog li.next{color:var(--rb-wine)}
+.rb-app .rb-prog li.next i{border:2px solid var(--rb-wine);color:var(--rb-wine);animation:rbGlow 1.8s infinite}
+
+/* category chips */
+.rb-app .rb-chip{transition:transform .2s,background .2s,border-color .2s,color .2s}
+.rb-app .rb-chip:hover{transform:translateY(-2px);border-color:var(--rb-wine);color:var(--rb-wine)}
+.rb-app .rb-chip.on:hover{color:#fff}
+.rb-app .rb-chip small{margin-left:6px;font-size:11.5px;opacity:.6}
+
+/* card grid */
+.rb-app .rb-cards{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:18px;padding:4px 2px 6px}
+.rb-app .rb-card{position:relative;display:block;width:100%;aspect-ratio:3/4;border:0;border-radius:18px;padding:0;overflow:hidden;isolation:isolate;
+  background:#2B1A20;color:#fff;text-align:left;font-weight:400;
+  box-shadow:0 12px 26px -20px rgba(70,15,35,.7);transition:transform .45s cubic-bezier(.2,.7,.2,1),box-shadow .45s}
+.rb-app .rb-card:hover{transform:translateY(-6px);box-shadow:0 24px 40px -22px rgba(110,22,49,.6)}
+.rb-app .rb-card:focus-visible{outline:3px solid var(--rb-wine);outline-offset:3px}
+.rb-app .rb-card.on{box-shadow:0 0 0 3px #fff,0 0 0 6px var(--rb-wine),0 24px 40px -22px rgba(110,22,49,.65)}
+.rb-app .rb-card-media{position:absolute;inset:0;z-index:-2}
+.rb-app .rb-card-media img,.rb-app .rb-ph{width:100%;height:100%;object-fit:cover;display:block;transition:transform 1s cubic-bezier(.2,.7,.2,1)}
+.rb-app .rb-card:hover .rb-card-media img,.rb-app .rb-card:hover .rb-ph{transform:scale(1.08)}
+.rb-app .rb-ph{display:grid;place-items:center;color:rgba(255,255,255,.32);background-size:14px 14px,cover}
+.rb-app .rb-ph .rb-i{width:30%;height:auto;aspect-ratio:1;margin-bottom:28%}
+.rb-app .rb-ph b{font-family:"Playfair Display",serif;font-size:110px;font-weight:700;color:rgba(255,255,255,.38);margin-bottom:30%;line-height:1}
+.rb-app .rb-ph-nail{background-image:radial-gradient(rgba(255,255,255,.13) 1px,transparent 1.6px),radial-gradient(120% 85% at 25% 8%,#F4B3C6 0,#C9577D 42%,#701635 100%)}
+.rb-app .rb-ph-mi{background-image:radial-gradient(rgba(255,255,255,.13) 1px,transparent 1.6px),radial-gradient(120% 85% at 80% 8%,#E3B3C4 0,#94405F 45%,#3F1024 100%)}
+.rb-app .rb-ph-combo{background-image:radial-gradient(rgba(255,255,255,.13) 1px,transparent 1.6px),radial-gradient(120% 85% at 30% 8%,#F7CDB4 0,#C8607A 45%,#6E1631 100%)}
+.rb-app .rb-ph-staff{background-image:radial-gradient(rgba(255,255,255,.13) 1px,transparent 1.6px),radial-gradient(120% 85% at 50% 15%,#F0CAD6 0,#A84D6E 48%,#4B1528 100%)}
+.rb-app .rb-ph-any{background-image:radial-gradient(rgba(255,255,255,.13) 1px,transparent 1.6px),linear-gradient(160deg,#B23A60 0,#8B1E3F 45%,#3F1024 100%)}
+.rb-app .rb-card-shade{position:absolute;inset:0;z-index:-1;background:linear-gradient(180deg,rgba(30,8,16,0) 28%,rgba(30,8,16,.5) 58%,rgba(30,8,16,.9) 100%);transition:opacity .4s}
+.rb-app .rb-card.on .rb-card-shade{background:linear-gradient(180deg,rgba(139,30,63,.12) 15%,rgba(110,22,49,.7) 58%,rgba(63,16,36,.96) 100%)}
+.rb-app .rb-card-shine{position:absolute;inset:0;pointer-events:none;background:linear-gradient(115deg,transparent 35%,rgba(255,255,255,.25) 50%,transparent 65%);transform:translateX(-130%)}
+.rb-app .rb-card:hover .rb-card-shine{transform:translateX(130%);transition:transform 1s ease}
+.rb-app .rb-card-top{position:absolute;top:12px;left:12px;right:12px;display:flex;justify-content:space-between;align-items:center}
+.rb-app .rb-card-tag{white-space:nowrap;display:inline-flex;gap:5px;align-items:center;background:rgba(255,255,255,.18);-webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px);border:1px solid rgba(255,255,255,.32);border-radius:999px;padding:4px 10px;font-size:12px;color:#fff}
+.rb-app .rb-card-tag .rb-i{width:13px;height:13px}
+.rb-app .rb-card .rb-tick{width:28px;height:28px;border-radius:50%;border:1.5px solid rgba(255,255,255,.75);background:rgba(255,255,255,.12);color:transparent;padding:5px;transition:background .25s}
+.rb-app .rb-card.on .rb-tick{background:#fff;border-color:#fff;color:var(--rb-wine);animation:rbPop .45s cubic-bezier(.2,.8,.3,1.4)}
+.rb-app .rb-card-body{position:absolute;left:0;right:0;bottom:0;padding:16px 16px 14px;display:flex;flex-direction:column;gap:6px}
+.rb-app .rb-card-kicker{display:flex;align-items:center;gap:8px;font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.85)}
+.rb-app .rb-card-kicker::after{content:"";height:1px;width:26px;background:currentColor;opacity:.65;transition:width .45s}
+.rb-app .rb-card:hover .rb-card-kicker::after{width:52px}
+.rb-app .rb-card-title{display:block;font-family:"Playfair Display",serif;font-size:21px;line-height:1.15;font-weight:700;color:#fff}
+.rb-app .rb-card-desc{font-size:12.5px;line-height:1.45;color:rgba(255,255,255,.82);display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.rb-app .rb-card:hover .rb-card-desc{-webkit-line-clamp:4}
+.rb-app .rb-card-foot{display:flex;justify-content:space-between;align-items:center;gap:8px;margin-top:6px;padding-top:10px;border-top:1px solid rgba(255,255,255,.2)}
+.rb-app .rb-card-price{font-size:17px;font-weight:600;color:#fff;white-space:nowrap}
+.rb-app .rb-card-cta{display:flex;align-items:center;gap:8px;font-size:13px;color:#fff}
+.rb-app .rb-card-cta em{font-style:normal}
+.rb-app .rb-card-btn{width:34px;height:34px;border-radius:50%;border:1.3px solid rgba(255,255,255,.65);display:grid;place-items:center;flex:none;transition:transform .4s cubic-bezier(.2,.7,.2,1),background .3s,color .3s}
+.rb-app .rb-card-btn span{width:16px;height:16px}
+.rb-app .rb-card:hover .rb-card-btn{background:#fff;color:var(--rb-wine);transform:rotate(90deg)}
+.rb-app .rb-card-staff:hover .rb-card-btn{transform:rotate(45deg)}
+.rb-app .rb-card.on .rb-card-btn{background:#fff;color:var(--rb-wine);transform:none}
+.rb-app .rb-card .rb-onl{display:none}
+.rb-app .rb-card.on .rb-onl{display:block}
+.rb-app .rb-card.on em.rb-onl{display:inline}
+.rb-app .rb-card.on .rb-off{display:none}
+.rb-app .rb-card.rb-pulse{animation:rbTap .4s cubic-bezier(.2,.7,.2,1)}
+
+/* entrance animations (only when the step / filter changes) */
+.rb-app .rb-anim .rb-card{animation:rbUp .6s cubic-bezier(.2,.7,.2,1) both;animation-delay:calc(var(--i,0) * 70ms)}
+.rb-app .rb-anim .rb-head,.rb-app .rb-anim .rb-chips{animation:rbFade .45s both}
+.rb-app .rb-anim .rb-days,.rb-app .rb-anim .rb-slots,.rb-app .rb-anim .rb-guest,.rb-app .rb-anim .rb-field,.rb-app .rb-anim .rb-row2,.rb-app .rb-anim .rb-rv{animation:rbFade .5s .08s both}
+.rb-app .rb-slot{transition:transform .15s,background .2s,border-color .2s,color .2s}
+.rb-app .rb-slot:hover{transform:translateY(-2px)}
+.rb-app .rb-slot.on{animation:rbPop .35s}
+.rb-app .rb-bump{display:inline-block;animation:rbBump .5s}
+.rb-app .rb-done-ic{animation:rbPop .6s .1s both}
+
+@keyframes rbUp{from{opacity:0;transform:translateY(26px) scale(.97)}to{opacity:1;transform:none}}
+@keyframes rbFade{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+@keyframes rbPop{0%{transform:scale(.4)}60%{transform:scale(1.15)}100%{transform:scale(1)}}
+@keyframes rbTap{0%{transform:scale(1)}35%{transform:scale(.95)}100%{transform:scale(1)}}
+@keyframes rbBump{0%{transform:scale(1)}40%{transform:scale(1.18)}100%{transform:scale(1)}}
+@keyframes rbGlow{0%{box-shadow:0 0 0 0 rgba(139,30,63,.45)}70%{box-shadow:0 0 0 10px rgba(139,30,63,0)}100%{box-shadow:0 0 0 0 rgba(139,30,63,0)}}
+
+@container rb (max-width:980px){
+  .rb-app .rb-cards{grid-template-columns:repeat(3,minmax(0,1fr))}
+}
+@container rb (max-width:820px){
+  .rb-app .rb-navwrap{margin:20px -16px 0}
+  .rb-app .rb-navwrap .rb-nav{border-radius:0;padding:12px 16px calc(12px + env(safe-area-inset-bottom))}
+}
+@container rb (max-width:640px){
+  .rb-app .rb-cards{grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+  .rb-app .rb-card{border-radius:14px}
+  .rb-app .rb-card-body{padding:12px 11px 10px;gap:4px}
+  .rb-app .rb-card-title{font-size:16.5px}
+  .rb-app .rb-card-desc{display:none}
+  .rb-app .rb-card-kicker{font-size:9.5px;letter-spacing:.1em}
+  .rb-app .rb-card-kicker::after{display:none}
+  .rb-app .rb-card-price{font-size:14.5px}
+  .rb-app .rb-card-cta em{display:none!important}
+  .rb-app .rb-card-btn{width:30px;height:30px}
+  .rb-app .rb-card-tag{font-size:11px;padding:3px 8px}
+  .rb-app .rb-card .rb-tick{width:24px;height:24px}
+  .rb-app .rb-card:hover{transform:none}
+}
+@media (prefers-reduced-motion:reduce){
+  .rb-app *,.rb-app *::before,.rb-app *::after{animation:none!important;transition:none!important}
+}
+
+/* =========================================================
+ * v1.2 – vùng bấm chọn cả thẻ, link chi tiết, dịch vụ chọn sẵn
+ * ======================================================= */
+.rb-app .rb-card-hit{position:absolute;inset:0;z-index:2;width:100%;height:100%;margin:0;padding:0;border:0;border-radius:inherit;background:transparent;cursor:pointer;box-shadow:none;min-height:0}
+.rb-app .rb-card-hit:hover,.rb-app .rb-card-hit:focus{background:transparent;box-shadow:none}
+.rb-app .rb-card-hit:focus-visible{outline:3px solid #fff;outline-offset:-6px}
+.rb-app .rb-card-top,.rb-app .rb-card-body{pointer-events:none}
+.rb-app .rb-card-price{display:block;font-size:18px;font-weight:600;color:#fff;margin-top:2px}
+.rb-app .rb-card-more{pointer-events:auto;position:relative;z-index:3;display:inline-flex;align-items:center;gap:5px;font-size:13px;color:#fff;text-decoration:none;padding:6px 0;border-bottom:1px solid rgba(255,255,255,.45);transition:gap .25s,border-color .25s}
+.rb-app .rb-card-more .rb-i{width:15px;height:15px;transition:transform .25s}
+.rb-app .rb-card-more:hover,.rb-app .rb-card-more:focus-visible{color:#fff;gap:8px;border-color:#fff}
+.rb-app .rb-card-more:hover .rb-i{transform:translate(2px,-2px)}
+.rb-app .rb-card.rb-pinned:not(.on){box-shadow:0 0 0 2px var(--rb-line),0 12px 26px -20px rgba(70,15,35,.7)}
+.rb-app .rb-pre{display:flex;align-items:center;gap:14px;background:var(--rb-pink2);border:1px solid var(--rb-line);border-radius:14px;padding:12px 14px 12px 16px;margin:-4px 0 16px;animation:rbFade .45s both}
+.rb-app .rb-pre>.rb-i{width:30px;height:30px;padding:6px;border-radius:50%;background:var(--rb-wine);color:#fff;flex:none}
+.rb-app .rb-pre>div{flex:1;min-width:0}
+.rb-app .rb-pre b{display:block;color:var(--rb-wine2);font-weight:600}
+.rb-app .rb-pre small{display:block;color:var(--rb-mute)}
+.rb-app .rb-btn.rb-sm{padding:9px 16px;font-size:14px}
+.rb-app .rb-x{width:30px;height:30px;border:0;border-radius:50%;background:transparent;color:var(--rb-mute);padding:6px;flex:none}
+.rb-app .rb-x:hover{background:#fff;color:var(--rb-wine)}
+@container rb (max-width:640px){
+  .rb-app .rb-card-price{font-size:15px}
+  .rb-app .rb-card-more{font-size:11.5px;padding:4px 0}
+  .rb-app .rb-card-more .rb-i{width:13px;height:13px}
+  .rb-app .rb-pre{flex-wrap:wrap}
+  .rb-app .rb-pre .rb-sm{order:3;flex:1 1 100%}
+  .rb-app .rb-pre .rb-x{position:absolute;right:8px;top:8px}
+  .rb-app .rb-pre{position:relative;padding-right:40px}
+}
+
+/* =========================================================
+ * v1.4 – Lịch hẹn của tôi (khách có tài khoản)
+ * ======================================================= */
+.rb-app .rb-mine{max-width:760px;margin:0 auto 22px}
+.rb-app .rb-mlist{display:flex;flex-direction:column;gap:10px}
+.rb-app .rb-mcard{display:flex;gap:14px;background:#fff;border:1px solid #F0E1E6;border-radius:16px;padding:14px 16px;box-shadow:0 10px 24px -20px rgba(110,22,49,.45);animation:rbFade .4s both}
+.rb-app .rb-mcard.past{background:#FCF9FA;box-shadow:none}
+.rb-app .rb-mdate{width:58px;flex:none;display:flex;flex-direction:column;align-items:center;justify-content:center;border-radius:12px;background:var(--rb-pink);color:var(--rb-wine2);padding:6px 0;align-self:flex-start}
+.rb-app .rb-mcard.past .rb-mdate{background:#F3ECEE;color:var(--rb-mute)}
+.rb-app .rb-mdate b{font-size:22px;line-height:1.1}
+.rb-app .rb-mdate small{font-size:11.5px}
+.rb-app .rb-mmain{flex:1;min-width:0}
+.rb-app .rb-mtop{display:flex;justify-content:space-between;gap:10px;align-items:flex-start}
+.rb-app .rb-mtop b{font-weight:600;color:var(--rb-ink)}
+.rb-app .rb-mmain>p{display:flex;flex-wrap:wrap;align-items:center;gap:4px;color:var(--rb-mute);font-size:14px;margin-top:4px}
+.rb-app .rb-mmain>p .rb-i{width:15px;height:15px}
+.rb-app .rb-mcode{display:block;color:#A89199;font-size:12px;margin-top:2px;letter-spacing:.03em}
+.rb-app .rb-macts{display:flex;gap:16px;flex-wrap:wrap;align-items:center;margin-top:10px;padding-top:10px;border-top:1px dashed #F0E1E6}
+.rb-app .rb-link-danger{color:#B3263A}
+.rb-app .rb-small-note{font-size:12.5px;color:var(--rb-mute)}
+.rb-app .rb-mcard .rb-cc{margin:10px 0 0;padding:10px 12px}
+.rb-app .rb-pasttoggle{margin:14px 0 10px}
+.rb-app .rb-mine .rb-none{flex-wrap:wrap}
+.rb-app .rb-mine .rb-none p{flex:1}
+.rb-app .rb-skel-list{display:flex;flex-direction:column}
+.rb-app .rb-skel-list span{height:96px;border-radius:16px}
+.rb-app .rb-other{max-width:760px;margin:0 auto;border:1px solid #F0E1E6;border-radius:16px;background:#fff;padding:0 16px}
+.rb-app .rb-other>summary{display:flex;gap:8px;align-items:center;cursor:pointer;padding:14px 0;color:var(--rb-wine2);font-weight:500;list-style:none}
+.rb-app .rb-other>summary::-webkit-details-marker{display:none}
+.rb-app .rb-other[open]>summary{border-bottom:1px solid #F3E6EA;margin-bottom:14px}
+.rb-app .rb-other .rb-lookup{padding-bottom:16px}
+.rb-app .rb-other .rb-lform{border:0;padding:0}
+.rb-app .rb-okmsg a{color:var(--rb-wine);font-weight:500}
+@container rb (max-width:560px){
+  .rb-app .rb-mcard{padding:12px;gap:10px}
+  .rb-app .rb-mdate{width:50px}
+  .rb-app .rb-mtop{flex-direction:column;gap:4px}
+}

@@ -1,0 +1,141 @@
+/* Ruby chat widget – bottom-right launcher + small chat panel */
+#rbc{--w:#8B1E3F;--w2:#6E1631;--p:#F9E4EA;--p2:#FDF3F6;--ink:#2F2226;--mute:#7A6168;--bd:#F0D9E0;--ok:#1F9D55;font-family:"Be Vietnam Pro",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;font-size:14.5px;line-height:1.5;color:var(--ink)}
+#rbc *,#rbc *::before,#rbc *::after{box-sizing:border-box}
+#rbc button{font:inherit;cursor:pointer;-webkit-tap-highlight-color:transparent;margin:0;padding:0;min-height:0;min-width:0;height:auto;line-height:1.4;text-transform:none;letter-spacing:normal;text-shadow:none;box-shadow:none;border:0;background:none;color:inherit;vertical-align:middle}
+#rbc a{text-transform:none;letter-spacing:normal}
+#rbc [hidden]{display:none!important}
+#rbc button:focus{outline:none}
+#rbc button:focus-visible,#rbc a:focus-visible,#rbc textarea:focus-visible{outline:2px solid #8B1E3F;outline-offset:2px}
+#rbc h2,#rbc h3,#rbc h4,#rbc p{font-family:inherit}
+#rbc svg{display:block}
+
+/* launcher */
+#rbc .rbc-launch{position:fixed;right:20px;bottom:20px;z-index:99990;width:62px;height:62px;padding:0;border-radius:50%;border:3px solid #fff;background:var(--p);box-shadow:0 12px 30px -8px rgba(110,22,49,.55);transition:transform .25s cubic-bezier(.2,.9,.3,1.3)}
+#rbc .rbc-launch:hover{transform:scale(1.07)}
+#rbc .rbc-launch .rbc-face{width:100%;height:100%;border-radius:50%;overflow:hidden}
+#rbc .rbc-launch .rbc-x{position:absolute;inset:0;display:none;place-items:center;border-radius:50%;background:var(--w);color:#fff}
+#rbc .rbc-launch .rbc-x svg{width:26px;height:26px}
+#rbc.open .rbc-launch .rbc-x{display:grid}
+#rbc .rbc-dot{position:absolute;top:-2px;right:-2px;min-width:20px;height:20px;padding:0 5px;border-radius:10px;background:#E5484D;color:#fff;font-size:12px;font-weight:600;line-height:20px;text-align:center;border:2px solid #fff}
+#rbc.open .rbc-dot,#rbc.seen .rbc-dot{display:none}
+#rbc .rbc-launch::after{content:"";position:absolute;inset:-6px;border-radius:50%;border:2px solid var(--w);opacity:0;animation:rbcRing 2.8s 1.5s 3}
+#rbc.open .rbc-launch::after,#rbc.seen .rbc-launch::after{display:none}
+@keyframes rbcRing{0%{opacity:.6;transform:scale(.9)}100%{opacity:0;transform:scale(1.35)}}
+
+/* teaser bubble */
+#rbc .rbc-tease{position:fixed;right:92px;bottom:30px;z-index:99990;max-width:230px;padding:10px 30px 10px 14px;border-radius:16px 16px 4px 16px;background:#fff;color:var(--ink);box-shadow:0 10px 30px -10px rgba(110,22,49,.45);border:1px solid var(--bd);font-size:13.5px;cursor:pointer;animation:rbcIn .35s cubic-bezier(.2,.9,.3,1.2)}
+#rbc .rbc-tease b{color:var(--w)}
+#rbc .rbc-tease button{position:absolute;top:4px;right:4px;width:22px;height:22px;border:0;background:none;color:var(--mute);font-size:16px;line-height:1;border-radius:50%}
+
+/* panel */
+#rbc .rbc-panel{position:fixed;right:20px;bottom:94px;z-index:99991;width:372px;height:min(620px,calc(100vh - 120px));display:flex;flex-direction:column;background:#fff;border-radius:22px;box-shadow:0 28px 70px -20px rgba(60,10,25,.45),0 0 0 1px rgba(139,30,63,.08);overflow:hidden;transform-origin:bottom right;transform:translateY(12px) scale(.92);opacity:0;visibility:hidden;transition:transform .28s cubic-bezier(.2,.9,.3,1.1),opacity .2s,visibility 0s .28s}
+#rbc.open .rbc-panel{transform:none;opacity:1;visibility:visible;transition:transform .28s cubic-bezier(.2,.9,.3,1.1),opacity .2s}
+#rbc .rbc-head{display:flex;align-items:center;gap:10px;padding:12px 10px 12px 14px;background:var(--w);color:#fff;flex:none}
+#rbc .rbc-ava{width:40px;height:40px;border-radius:50%;overflow:hidden;flex:none;background:var(--p);border:2px solid rgba(255,255,255,.85)}
+#rbc .rbc-head h2{margin:0;font-size:15.5px;font-weight:600;line-height:1.25;color:#fff;letter-spacing:0;text-transform:none}
+#rbc .rbc-head small{display:flex;align-items:center;gap:6px;font-size:12px;opacity:.9}
+#rbc .rbc-head small i{width:8px;height:8px;border-radius:50%;background:#4ADE80;box-shadow:0 0 0 3px rgba(74,222,128,.25)}
+#rbc .rbc-head .rbc-hb{margin-left:auto;display:flex;gap:2px}
+#rbc .rbc-ib{width:34px;height:34px;display:grid;place-items:center;border:0;border-radius:10px;background:transparent;color:#fff;opacity:.9}
+#rbc .rbc-ib:hover{background:rgba(255,255,255,.14);opacity:1}
+#rbc .rbc-ib svg{width:20px;height:20px}
+#rbc .rbc-ib.on{background:rgba(255,255,255,.2)}
+#rbc .rbc-menu{position:absolute;top:58px;right:10px;z-index:3;min-width:190px;padding:6px;background:#fff;border-radius:12px;box-shadow:0 14px 40px -12px rgba(60,10,25,.45);border:1px solid var(--bd)}
+#rbc .rbc-menu button,#rbc .rbc-menu a{display:flex;align-items:center;gap:10px;width:100%;padding:9px 10px;border:0;border-radius:8px;background:none;color:var(--ink);text-align:left;text-decoration:none;font-size:14px}
+#rbc .rbc-menu button:hover,#rbc .rbc-menu a:hover{background:var(--p2)}
+#rbc .rbc-menu svg{width:18px;height:18px;color:var(--w)}
+
+/* welcome */
+#rbc .rbc-home{flex:1;overflow:auto;display:flex;flex-direction:column;align-items:center;text-align:center;padding:26px 24px 18px;background:linear-gradient(180deg,var(--p2) 0,#fff 46%)}
+#rbc .rbc-home>*{flex-shrink:0}
+#rbc .rbc-hero{position:relative;width:112px;height:112px;margin:10px 0 14px}
+#rbc .rbc-hero .rbc-face{width:112px;height:112px;border-radius:50%;overflow:hidden;box-shadow:0 10px 26px -10px rgba(139,30,63,.5);animation:rbcFloat 3.6s ease-in-out infinite}
+#rbc .rbc-hero .rbc-say{position:absolute;top:-14px;right:-56px;padding:5px 10px;background:#fff;border:1.5px solid var(--ink);border-radius:12px 12px 12px 3px;font-size:11.5px;font-weight:600;line-height:1.25;white-space:nowrap;color:var(--ink)}
+#rbc .rbc-hero .rbc-say b{color:var(--w)}
+@keyframes rbcFloat{50%{transform:translateY(-5px)}}
+#rbc .rbc-home h3{margin:0 0 8px;font-size:20px;font-weight:700;line-height:1.3;color:var(--ink);letter-spacing:0;text-transform:none}
+#rbc .rbc-home p{margin:0 0 20px;color:var(--mute);font-size:14.5px}
+#rbc .rbc-cta{display:flex;align-items:center;justify-content:center;gap:8px;width:100%;height:46px;border:0;border-radius:12px;background:var(--w);color:#fff;font-weight:600;font-size:15.5px;box-shadow:0 10px 22px -12px rgba(139,30,63,.8);transition:background .15s,transform .15s}
+#rbc .rbc-cta:hover{background:var(--w2);transform:translateY(-1px)}
+#rbc .rbc-cta svg{width:20px;height:20px}
+#rbc .rbc-or{display:flex;align-items:center;gap:10px;width:100%;margin:22px 0 14px;color:var(--mute);font-size:12.5px}
+#rbc .rbc-or::before,#rbc .rbc-or::after{content:"";flex:1;height:1px;background:var(--bd)}
+#rbc .rbc-contacts{display:flex;gap:16px;justify-content:center}
+#rbc .rbc-ct{width:52px;height:52px;display:grid;place-items:center;border-radius:50%;background:#fff;border:1px solid var(--bd);text-decoration:none;box-shadow:0 4px 12px -8px rgba(60,10,25,.4);transition:transform .15s}
+#rbc .rbc-ct:hover{transform:translateY(-2px)}
+#rbc .rbc-ct svg{width:24px;height:24px}
+#rbc .rbc-ct.zalo{color:#0068FF;font-weight:700;font-size:13px}
+#rbc .rbc-ct.tel{color:var(--ok)}
+#rbc .rbc-ct.fb{color:#0A7CFF}
+#rbc .rbc-quick{width:100%;margin-top:22px;text-align:left}
+#rbc .rbc-quick h4{margin:0 0 8px;font-size:12.5px;font-weight:600;color:var(--mute);text-transform:uppercase;letter-spacing:.04em}
+#rbc .rbc-quick button{display:flex;align-items:center;justify-content:space-between;width:100%;padding:10px 12px;margin-bottom:6px;border:1px solid var(--bd);border-radius:10px;background:#fff;color:var(--ink);font-size:14px;text-align:left}
+#rbc .rbc-quick button:hover{border-color:var(--w);color:var(--w)}
+#rbc .rbc-quick button svg{width:16px;height:16px;color:var(--w);flex:none}
+
+/* conversation */
+#rbc .rbc-chat{flex:1;min-height:0;display:flex;flex-direction:column}
+#rbc .rbc-log{flex:1;overflow-y:auto;padding:16px 14px 8px;background:#FCFAFB;scroll-behavior:smooth}
+#rbc .rbc-row{display:flex;gap:8px;margin-bottom:12px;align-items:flex-end;animation:rbcIn .25s ease-out}
+#rbc .rbc-row.u{justify-content:flex-end}
+#rbc .rbc-row .rbc-ava{width:28px;height:28px;border:0}
+#rbc .rbc-b{max-width:82%;padding:9px 13px;border-radius:16px;background:#fff;border:1px solid var(--bd);word-wrap:break-word;overflow-wrap:anywhere}
+#rbc .rbc-row.b .rbc-b{border-bottom-left-radius:4px}
+#rbc .rbc-row.u .rbc-b{background:var(--w);border-color:var(--w);color:#fff;border-bottom-right-radius:4px}
+#rbc .rbc-b ul{margin:4px 0;padding-left:18px}
+#rbc .rbc-b li{margin:2px 0}
+#rbc .rbc-b a{color:var(--w);font-weight:500}
+#rbc .rbc-row.u .rbc-b a{color:#fff}
+#rbc .rbc-b p{margin:0 0 4px}.rbc-b p:last-child{margin:0}
+#rbc .rbc-meta{display:block;margin-top:2px;font-size:11px;color:var(--mute)}
+#rbc .rbc-extra{margin:-4px 0 12px 36px;display:flex;flex-direction:column;gap:8px}
+#rbc .rbc-card{display:flex;gap:10px;align-items:center;padding:10px 12px;border:1px solid var(--bd);border-radius:12px;background:#fff}
+#rbc .rbc-card div{flex:1;min-width:0}
+#rbc .rbc-card b{display:block;font-size:14px;line-height:1.35}
+#rbc .rbc-card small{color:var(--mute);font-size:12.5px}
+#rbc .rbc-card a{flex:none;padding:7px 12px;border-radius:999px;background:var(--w);color:#fff;text-decoration:none;font-size:13px;font-weight:600}
+#rbc .rbc-card a.ghost{background:var(--p);color:var(--w)}
+#rbc .rbc-links{display:flex;flex-wrap:wrap;gap:6px}
+#rbc .rbc-links a{display:inline-flex;align-items:center;gap:6px;padding:7px 12px;border-radius:999px;border:1px solid var(--w);color:var(--w);text-decoration:none;font-size:13px;font-weight:600;background:#fff}
+#rbc .rbc-links a.tel{border-color:var(--ok);color:var(--ok)}
+#rbc .rbc-links a.zalo{border-color:#0068FF;color:#0068FF}
+#rbc .rbc-links svg{width:15px;height:15px}
+#rbc .rbc-typing{display:inline-flex;gap:4px;padding:12px 14px}
+#rbc .rbc-typing i{width:7px;height:7px;border-radius:50%;background:var(--w);opacity:.35;animation:rbcDot 1.1s infinite}
+#rbc .rbc-typing i:nth-child(2){animation-delay:.15s}.rbc-typing i:nth-child(3){animation-delay:.3s}
+@keyframes rbcDot{30%{opacity:1;transform:translateY(-3px)}}
+@keyframes rbcIn{from{opacity:0;transform:translateY(8px)}}
+
+#rbc .rbc-sug{display:flex;gap:6px;overflow-x:auto;padding:8px 12px 2px;background:#fff;scrollbar-width:none;flex:none}
+#rbc .rbc-sug::-webkit-scrollbar{display:none}
+#rbc .rbc-sug button{flex:none;padding:7px 12px;border-radius:999px;border:1px solid var(--bd);background:var(--p2);color:var(--w2);font-size:13px;white-space:nowrap}
+#rbc .rbc-sug button:hover{border-color:var(--w);background:var(--p)}
+
+#rbc .rbc-bar{display:flex;align-items:flex-end;gap:6px;padding:8px 10px 10px;background:#fff;border-top:1px solid #F5E9ED;flex:none}
+#rbc .rbc-in{flex:1;width:auto;min-height:42px;height:42px;box-sizing:border-box;max-height:110px;padding:10px 14px;border:1px solid var(--bd);border-radius:21px;background:#FCFAFB;color:var(--ink);font:inherit;font-size:15px;line-height:1.4;resize:none;outline:none;box-shadow:none;margin:0}
+#rbc .rbc-in:focus{border-color:var(--w);background:#fff}
+#rbc .rbc-mic,#rbc .rbc-send{width:42px;height:42px;flex:none;display:grid;place-items:center;border-radius:50%;border:0;padding:0}
+#rbc .rbc-mic{background:var(--p);color:var(--w)}
+#rbc .rbc-mic svg,#rbc .rbc-send svg{width:21px;height:21px}
+#rbc .rbc-mic.rec{background:#E5484D;color:#fff;animation:rbcPulse 1.2s infinite}
+@keyframes rbcPulse{0%{box-shadow:0 0 0 0 rgba(229,72,77,.5)}100%{box-shadow:0 0 0 12px rgba(229,72,77,0)}}
+#rbc .rbc-send{background:var(--w);color:#fff}
+#rbc .rbc-send:disabled{opacity:.4;cursor:default}
+#rbc .rbc-listen{display:flex;align-items:center;justify-content:center;gap:8px;padding:6px 12px 0;color:#C0313A;font-size:12.5px;background:#fff}
+#rbc .rbc-wave{display:flex;gap:3px;align-items:center;height:14px}
+#rbc .rbc-wave i{width:3px;height:6px;border-radius:2px;background:#E5484D;animation:rbcWave .9s infinite ease-in-out}
+#rbc .rbc-wave i:nth-child(2){animation-delay:.12s}.rbc-wave i:nth-child(3){animation-delay:.24s}.rbc-wave i:nth-child(4){animation-delay:.36s}
+@keyframes rbcWave{50%{height:14px}}
+#rbc .rbc-foot{padding:0 12px 8px;background:#fff;color:#A68D95;font-size:11px;text-align:center;flex:none}
+
+/* keep Flatsome's back-to-top clear of the launcher */
+body.rbc-on .back-to-top{bottom:96px!important}
+
+@media (max-width:480px){
+  #rbc .rbc-launch{right:14px;bottom:14px;width:58px;height:58px}
+  #rbc .rbc-panel{left:8px;right:8px;bottom:82px;width:auto;height:min(640px,calc(100dvh - 100px));border-radius:20px}
+  #rbc .rbc-tease{right:80px;bottom:22px;max-width:200px}
+  #rbc .rbc-in{font-size:16px}
+}
+@media (prefers-reduced-motion:reduce){#rbc *{animation:none!important;transition:none!important}}
+@media print{#rbc{display:none}}

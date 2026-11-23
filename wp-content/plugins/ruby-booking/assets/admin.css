@@ -1,0 +1,31 @@
+.rb-admin .rb-filter{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin:14px 0}
+.rb-admin .rb-table td{vertical-align:top}
+.rb-admin .rb-muted{color:#8c7a80;font-size:12px}
+.rb-admin .rb-note{margin-top:6px;padding:6px 8px;background:#fdf2f5;border-left:3px solid #e59ab0;font-size:12px}
+.rb-admin .rb-thumbs img{width:44px;height:44px;object-fit:cover;border-radius:6px;margin:0 4px 4px 0}
+.rb-admin .rb-status-form{display:flex;flex-direction:column;gap:6px;align-items:flex-start}
+.rb-admin .rb-badge{display:inline-block;padding:2px 10px;border-radius:99px;font-size:12px;font-weight:600}
+.rb-admin .rb-pending{background:#fff4e0;color:#8a5a00}
+.rb-admin .rb-confirmed{background:#e3f4ea;color:#1f6b41}
+.rb-admin .rb-done{background:#e8eef9;color:#2b4c8c}
+.rb-admin .rb-cancelled{background:#f3e9ec;color:#8b1e3f}
+.rb-admin .rb-cols{display:grid;grid-template-columns:1fr 360px;gap:22px;align-items:start;margin-top:14px}
+@media (max-width:1100px){.rb-admin .rb-cols{grid-template-columns:1fr}}
+.rb-admin .rb-card{background:#fff;border:1px solid #e2d4d9;border-radius:10px;padding:18px 20px}
+.rb-admin .rb-card.rb-wide{max-width:900px;margin-top:14px}
+.rb-admin .rb-card h2{margin:6px 0 12px;font-size:16px;color:#6e1631}
+.rb-admin .rb-card label{display:block;margin-bottom:12px;font-weight:500}
+.rb-admin .rb-card label input:not([type=checkbox]),.rb-admin .rb-card label select,.rb-admin .rb-card label textarea{display:block;width:100%;margin-top:4px}
+.rb-admin .rb-card .rb-check{display:flex;gap:6px;align-items:center;font-weight:400}
+.rb-admin .rb-card .rb-inline{display:inline-flex;margin-right:16px}
+.rb-admin .rb-2{display:grid;grid-template-columns:1fr 1fr;gap:12px;align-items:end}
+.rb-admin .rb-3{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;align-items:end}
+.rb-admin fieldset{margin:0 0 12px}.rb-admin legend{font-weight:500;margin-bottom:6px}
+.rb-admin .rb-actions a{margin-right:10px}.rb-admin .rb-del{color:#b32d2e}
+.rb-admin .rb-avatar img,.rb-admin .rb-avatar span{width:36px;height:36px;border-radius:50%;object-fit:cover;display:grid;place-items:center;background:#f9e4ea;color:#8b1e3f;font-weight:600}
+.rb-admin .rb-photo{display:flex;gap:10px;align-items:center;margin-bottom:12px}
+.rb-admin .rb-photo-prev img{width:48px;height:48px;border-radius:50%;object-fit:cover}
+.rb-admin .rb-help{background:#fdf2f5;border:1px dashed #efc9d4;border-radius:8px;padding:12px 14px;line-height:1.7}
+.rb-admin .rb-sthumb img,.rb-admin .rb-sthumb span{width:44px;height:58px;object-fit:cover;border-radius:6px;display:block;background:#f9e4ea}
+.rb-admin .rb-photo-sq .rb-photo-prev img{width:54px;height:72px;border-radius:8px}
+.rb-admin .rb-tip{margin:-6px 0 12px}
